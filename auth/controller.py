@@ -15,9 +15,9 @@ def auth_login(request):
         email=data.get('name')
         password=data.get('password')
         conn = mysqlConnect()
-        sql = 'select * from user where name=%s and password=%s'
+        sql = 'select * from [user] where email=%s and password=%s'
         cur = conn.cursor()
-        val = [email,password]
+        val = (email,password)
         cur.execute(sql,val)
         output = cur.fetchall()
         user = output

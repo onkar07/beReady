@@ -10,8 +10,8 @@ def createQuestions(request):
     conn = mysqlConnect()
     user = get_jwt_identity()
     techer_id = user['id']
-    sql = 'INSERT INTO `questions` (`question`, `subject_id`, `link`, `teacher_id`) VALUES (%s,%s,%s,%s);'
-    val = [question,subject,link,techer_id]
+    sql = 'INSERT INTO questions (question, subject_id, link, teacher_id) VALUES (%s,%s,%s,%s);'
+    val = (question,subject,link,techer_id)
     cur = conn.cursor()
     try:
         cur.execute(sql,val)
@@ -41,7 +41,7 @@ def listOneById(request):
         id = request.args.get('id',type = int)
         conn = mysqlConnect()
         sql = 'select * from questions as que LEFT JOIN subject as sb ON sb.id = que.subject_id WHERE que.teacher_id=%s'
-        val = [id]
+        val = (id)
         cur = conn.cursor()
         cur.execute(sql,val)
         output = cur.fetchall()
@@ -62,8 +62,8 @@ def updateQuestions(request):
     techer_id = user['id']
     print(id, type(subject))
     conn = mysqlConnect()
-    sql = '''UPDATE questions SET question=%s, subject_id=%s,link=%s, teacher_id=%s WHERE id=%s;'''
-    val = [question,subject,link,techer_id,id]
+    sql = 'UPDATE questions SET question=%s, subject_id=%s,link=%s, teacher_id=%s WHERE id=%s;'
+    val = (question,subject,link,techer_id,id)
     cur = conn.cursor()
     try:
         cur.execute(sql,val)
@@ -80,7 +80,7 @@ def deleteQuestions(request):
     id = request.args.get('id',type = int)
     conn = mysqlConnect()
     sql = 'DELETE FROM questions WHERE id=%s;'
-    val = [id]
+    val = (id)
     cur = conn.cursor()
     try:
         cur.execute(sql,val)

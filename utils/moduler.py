@@ -28,11 +28,12 @@ def getDir():
         # check if current path is a file
             if os.path.isdir(os.path.join(dir_path, path)):
                 insideDir.append(path)
-                
+    print(insideDir,projectNameDirectory)
     for itm in insideDir:
-        path = './'+projectNameDirectory[0]+'/'+itm+'/module.py'
+        path = './'+projectNameDirectory[2]+'/'+itm+'/module.py'
         try:
             file = open(path, 'r').read()
             exec(file)
         except Exception as e:
             print(e)
+            pass

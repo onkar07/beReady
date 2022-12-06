@@ -18,7 +18,7 @@ def getQuestions(request):
         id = request.args.get('id',type = int)
         conn = mysqlConnect()
         sql = 'SELECT * FROM questions WHERE subject_id = %s'
-        val=[id]
+        val=(id)
         cur = conn.cursor()
         cur.execute(sql,val)
         output = cur.fetchall()
@@ -32,8 +32,8 @@ def createSub(request):
     data=request.get_json()
     subject=data.get('subject')
     conn = mysqlConnect()
-    sql = 'INSERT INTO `subject` (`subject`) VALUES (%s);'
-    val = [subject]
+    sql = 'INSERT INTO subject (subject) VALUES (%s);'
+    val = (subject)
     cur = conn.cursor()
     try:
         cur.execute(sql,val)
@@ -51,8 +51,8 @@ def updateSub(request):
     id = request.args.get('id',type = int)
     print(id, type(subject))
     conn = mysqlConnect()
-    sql = '''UPDATE `subject` SET subject=%s WHERE id=%s'''
-    val = [subject,id]
+    sql = 'UPDATE subject SET subject=%s WHERE id=%s'
+    val = (subject,id)
     cur = conn.cursor()
     try:
         cur.execute(sql,val)

@@ -4,15 +4,18 @@ def registerUser():
     try:
         conn = mysqlConnect()
         cur = conn.cursor()
-        
-        sql1 = 'CREATE TABLE user ( id int(11) NOT NULL AUTO_INCREMENT,name varchar(25) NOT NULL, email varchar(25) NOT NULL, password varchar(25), role varchar(25) ,PRIMARY KEY (id), UNIQUE KEY (email));;'
-        cur.execute(sql1)
-        conn.commit()
-
-        sql = 'INSERT INTO `user` (`id`, `name`, `email`, `password`, `role`) VALUES (1, "sudo", "sudo", "sudo@123", "sudo");'
-        cur.execute(sql)
-        conn.commit()
+        try:
+            sql1 = "CREATE TABLE [user] (id INT NOT NULL IDENTITY(1,1),name VARCHAR(25) NOT NULL, email VARCHAR(25) NOT NULL, password VARCHAR(25), role VARCHAR(25) ,PRIMARY KEY (id), UNIQUE (email))"
+            cur.execute(sql1)
+        except Exception as e:
+            print("creatre",e)
+        try:
+            sql = "INSERT INTO [user] (name, email, password, role) VALUES ('sudo', 'sudo@gamil.com', 'sudo@123', 'sudo');"
+            cur.execute(sql)
+        except Exception as e:
+            print("Insert",e)
         conn.close()
         print("Sudo User Register")
     except Exception as e:
-        print(e)
+        print("Error in register user",e)
+    

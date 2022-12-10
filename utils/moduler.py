@@ -30,7 +30,7 @@ def getDir():
                 insideDir.append(path)
     print(insideDir,projectNameDirectory)
     for itm in insideDir:
-        path = './'+projectNameDirectory[2]+'/'+itm+'/module.py'
+        path = './'+'eInterview'+'/'+itm+'/module.py'
         try:
             file = open(path, 'r').read()
             exec(file)

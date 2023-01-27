@@ -12,7 +12,7 @@ from utils.sqlConnection import mysqlConnect
 def auth_login(request):
     try:
         data=request.get_json()
-        email=data.get('name')
+        email=data.get('email')
         password=data.get('password')
         conn = mysqlConnect()
         sql = 'select * from [user] where email=%s and password=%s'

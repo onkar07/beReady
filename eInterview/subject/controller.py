@@ -69,7 +69,7 @@ def deleteSub(request):
     id = request.args.get('id',type = int)
     conn = mysqlConnect()
     sql = 'DELETE FROM subject WHERE id=%s;'
-    val = [id]
+    val = (id)
     cur = conn.cursor()
     try:
         cur.execute(sql,val)

@@ -73,7 +73,10 @@ def updateQuestions(request):
         cur.execute(sql,val)
         conn.commit()
         conn.close()
-        return ({"msg":"success"})
+        response = jsonify(
+            is_success = True
+        )
+        return response
     except Exception as e:
         print(e)
         return ({"msg":"fail"})
@@ -90,7 +93,10 @@ def deleteQuestions(request):
         cur.execute(sql,val)
         conn.commit()
         conn.close()
-        return ({"msg":"success"})
+        response = jsonify(
+            is_success = True
+        )
+        return response
     except Exception as e:
         print(e)
         return ({"msg":"fail"})

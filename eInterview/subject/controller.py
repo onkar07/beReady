@@ -1,4 +1,5 @@
 from utils.sqlConnection import mysqlConnect
+from flask import request, Blueprint, jsonify
 
 def subjectList(request):
     try:
@@ -39,7 +40,10 @@ def createSub(request):
         cur.execute(sql,val)
         conn.commit()
         conn.close()
-        return ({"msg":"success"})
+        response = jsonify(
+            is_success = True
+        )
+        return response
     except Exception as e:
         print(e)
         return ({"msg":"fail"})

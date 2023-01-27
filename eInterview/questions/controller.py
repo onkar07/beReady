@@ -1,5 +1,6 @@
 from utils.sqlConnection import mysqlConnect
 from flask_jwt_extended import (get_jwt_identity)
+from flask import request, Blueprint, jsonify
 # from eInterview.questions.model import createTable
 # createTable()
 def createQuestions(request):
@@ -17,7 +18,10 @@ def createQuestions(request):
         cur.execute(sql,val)
         conn.commit()
         conn.close()
-        return ({"msg":"question added"})
+        response = jsonify(
+            is_success = True
+        )
+        return response
     except Exception as e:
         print(e)
         return ({"msg":"fail"})

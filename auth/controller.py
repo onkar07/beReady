@@ -12,7 +12,7 @@ from utils.sqlConnection import mysqlConnect
 def auth_login(request):
     try:
         data=request.get_json()
-        email=data.get('email')
+        email=data.get('name')
         password=data.get('password')
         conn = mysqlConnect()
         sql = 'select * from [user] where email=%s and password=%s'
@@ -26,9 +26,9 @@ def auth_login(request):
         print("user",user)
         userData = {"id":user[0][0],
                     "name":user[0][1],
-                    "role":user[0][4]}
+                    "role":user[0][4],}
         conn.close()
-        if (email == user[0][1]) and (password==user[0][3]):
+        if (email == user[0][2]) and (password==user[0][3]):
             access_token=create_access_token(identity=userData)
             refresh_token=create_refresh_token(identity=userData)
 

@@ -24,7 +24,7 @@ def listOne():
 @jwt_required(locations=['headers'])
 @requires_access_level(access_level=['sudo','teacher'])
 def create():
-    return jsonify(createQuestions(request))
+    return createQuestions(request)
 
 
 @questions_bp.route("/update", methods=['PATCH'])

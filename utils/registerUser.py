@@ -26,8 +26,7 @@ def registerUserByApi(request):
         name = data.get('name')
         email = data.get('email')
         password=data.get('password')
-        role=data.get('role')
-        print("sdssdsd",name,email,password,role)
+        role='student'
         conn = mysqlConnect()
         cur = conn.cursor()
         try:

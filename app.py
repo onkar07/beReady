@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 from flask_jwt_extended import JWTManager
 from eInterview.subject.subject import subject_bp
 from auth.auth import auth_bp
 from eInterview.questions.questions import questions_bp
 from datetime import timedelta
 from flask_cors import CORS, cross_origin
-from utils.registerUser import registerUser
+from utils.registerUser import registerUser, registerUserByApi
 from utils.moduler import getDir
 from utils.createDb import createDb
 app = Flask(__name__)
@@ -34,7 +34,11 @@ app.register_blueprint(questions_bp, url_prefix='/question')
 
 @app.route('/', methods=['GET'])
 def root():
-    return render_template('index.html') 
+    return render_template('index.html')
+
+@app.route('/registerUser', methods=['POST'])
+def register_user():
+    return registerUserByApi(request) 
 # running app
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

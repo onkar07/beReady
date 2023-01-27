@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from utils.policy import requires_access_level
@@ -23,7 +24,7 @@ def listOne():
 @jwt_required(locations=['headers'])
 @requires_access_level(access_level=['sudo','teacher'])
 def create():
-    return createQuestions(request)
+    return jsonify(createQuestions(request))
 
 
 @questions_bp.route("/update", methods=['PATCH'])
